@@ -3,16 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1e293b">
-    <title>ZARNS Monitor - Sistema de Acompanhamento de Evolução</title>
-    
-    <!-- PWA Meta Tags -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlpBUk5TIE1vbml0b3IgLSBFdm9sdcOnw6NvIiwKICAic2hvcnRfbmFtZSI6ICJaQVJOUyBNb25pdG9yIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjMWUyOTNiIiwKICAib3JpZW50YXRpb24iOiAiYW55Igp9">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    
-    <!-- Chart.js -->
+    <title>ZARNS Monitor - Sistema de Acompanhamento</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-    
     <style>
         * {
             margin: 0;
@@ -48,7 +40,6 @@
             line-height: 1.6;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, var(--dark) 0%, var(--primary-dark) 100%);
             color: white;
@@ -59,62 +50,12 @@
             z-index: 50;
         }
 
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-text h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .logo-text p {
-            font-size: 0.75rem;
-            opacity: 0.8;
-            margin: 0;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        /* Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
 
-        /* Buttons */
         .btn {
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
@@ -125,8 +66,9 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            text-decoration: none;
             font-size: 0.875rem;
+            background: var(--primary);
+            color: white;
         }
 
         .btn:hover {
@@ -134,216 +76,57 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
         .btn-success {
             background: var(--success);
-            color: white;
-        }
-
-        .btn-white {
-            background: white;
-            color: var(--dark);
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         }
 
         .btn-danger {
             background: var(--danger);
-            color: white;
-        }
-
-        .btn-info {
-            background: var(--info);
-            color: white;
         }
 
         .btn-sm {
-            padding: 0.375rem 0.75rem;
+            padding: 0.25rem 0.5rem;
             font-size: 0.75rem;
         }
 
-        /* Dropdown */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            right: 0;
-            top: 100%;
-            margin-top: 0.5rem;
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
-            display: none;
-            z-index: 100;
-        }
-
-        .dropdown-menu.show {
-            display: block;
-        }
-
-        .dropdown-item {
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background 0.2s;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            font-size: 0.875rem;
-        }
-
-        .dropdown-item:hover {
-            background: var(--gray-50);
-        }
-
-        .dropdown-divider {
-            height: 1px;
-            background: var(--gray-200);
-            margin: 0.5rem 0;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-            transition: all 0.2s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gray-100);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--gray-600);
-        }
-
-        /* Cards */
         .card {
             background: white;
             border-radius: 0.5rem;
+            padding: 1.5rem;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        .card-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--gray-200);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .card-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--gray-900);
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        /* Tabs */
         .tabs {
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .tab-nav {
             display: flex;
-            background: var(--gray-50);
-            border-bottom: 1px solid var(--gray-200);
-            overflow-x: auto;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--gray-200);
+            padding-bottom: 0;
         }
 
-        .tab-button {
-            padding: 1rem 1.5rem;
+        .tab {
+            padding: 0.75rem 1.5rem;
             background: none;
             border: none;
             cursor: pointer;
             font-weight: 500;
             color: var(--gray-600);
-            white-space: nowrap;
-            position: relative;
+            border-bottom: 2px solid transparent;
             transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: -2px;
         }
 
-        .tab-button:hover {
+        .tab:hover {
             color: var(--gray-900);
-            background: var(--gray-100);
         }
 
-        .tab-button.active {
+        .tab.active {
             color: var(--primary);
-            background: white;
-        }
-
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
         .tab-content {
-            padding: 1.5rem;
             display: none;
         }
 
@@ -351,45 +134,8 @@
             display: block;
         }
 
-        /* Tables */
-        .table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: var(--gray-50);
-            padding: 0.75rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--gray-700);
-            border-bottom: 1px solid var(--gray-200);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        td {
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--gray-100);
-            font-size: 0.875rem;
-        }
-
-        tr:hover {
-            background: var(--gray-50);
-        }
-
-        /* Forms */
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-label {
@@ -406,7 +152,6 @@
             border: 1px solid var(--gray-300);
             border-radius: 0.375rem;
             font-size: 0.875rem;
-            transition: all 0.2s;
         }
 
         .form-control:focus {
@@ -415,18 +160,6 @@
             box-shadow: 0 0 0 3px rgba(55, 48, 163, 0.1);
         }
 
-        textarea.form-control {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -434,13 +167,12 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 100;
             padding: 1rem;
-            overflow-y: auto;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .modal-content {
@@ -450,18 +182,6 @@
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            animation: modalIn 0.2s ease;
-        }
-
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
         }
 
         .modal-header {
@@ -475,7 +195,6 @@
         .modal-title {
             font-size: 1.25rem;
             font-weight: 600;
-            color: var(--gray-900);
         }
 
         .modal-close {
@@ -486,16 +205,6 @@
             cursor: pointer;
             width: 32px;
             height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.375rem;
-            transition: all 0.2s;
-        }
-
-        .modal-close:hover {
-            background: var(--gray-100);
-            color: var(--gray-600);
         }
 
         .modal-body {
@@ -510,149 +219,57 @@
             gap: 0.5rem;
         }
 
-        /* Badge */
-        .badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            display: inline-block;
-        }
-
-        .badge-danger {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .badge-warning {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .badge-success {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .badge-info {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        /* Charts */
-        .chart-container {
-            position: relative;
-            height: 300px;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        .chart-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        /* Alert */
-        .alert {
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .alert-info {
-            background: #dbeafe;
-            color: #1e40af;
-            border: 1px solid #93c5fd;
-        }
-
-        .alert-success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #86efac;
-        }
-
-        .alert-warning {
-            background: #fef3c7;
-            color: #92400e;
-            border: 1px solid #fde047;
-        }
-
-        /* Performance Bar */
-        .performance-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--gray-200);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 0.5rem;
-        }
-
-        .performance-fill {
-            height: 100%;
-            transition: width 0.3s ease;
-        }
-
-        .performance-fill.high {
-            background: var(--success);
-        }
-
-        .performance-fill.medium {
-            background: var(--warning);
-        }
-
-        .performance-fill.low {
-            background: var(--danger);
-        }
-
-        /* Evaluation List */
-        .evaluation-list {
-            display: grid;
-            gap: 0.5rem;
-            max-height: 300px;
-            overflow-y: auto;
-            padding: 0.5rem;
-            background: var(--gray-50);
-            border-radius: 0.375rem;
-        }
-
-        .evaluation-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
+        .stat-card {
             background: white;
-            border-radius: 0.375rem;
-            border: 1px solid var(--gray-200);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         }
 
-        .evaluation-date {
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .stat-label {
             font-size: 0.875rem;
             color: var(--gray-600);
         }
 
-        .evaluation-grade {
-            font-weight: 600;
-            font-size: 1.125rem;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        /* Empty State */
+        th {
+            background: var(--gray-50);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.875rem;
+        }
+
         .empty-state {
             text-align: center;
             padding: 3rem;
             color: var(--gray-500);
         }
 
-        .empty-state svg {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1rem;
-            opacity: 0.3;
-        }
-
-        /* Notification */
         .notification {
             position: fixed;
             bottom: 1rem;
@@ -662,10 +279,6 @@
             padding: 1rem 1.5rem;
             border-radius: 0.5rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            z-index: 200;
             animation: slideIn 0.3s ease;
         }
 
@@ -680,410 +293,308 @@
             }
         }
 
-        /* Search Box */
-        .search-box {
+        .grade-input {
+            width: 80px;
+            text-align: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .chart-container {
             position: relative;
-            max-width: 300px;
+            height: 300px;
+            margin: 2rem 0;
         }
 
-        .search-box input {
-            padding-left: 2.5rem;
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
         }
 
-        .search-box svg {
-            position: absolute;
-            left: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1.25rem;
-            height: 1.25rem;
-            color: var(--gray-400);
+        .attendance-grid {
+            display: grid;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
-        /* File input */
-        .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
+        .attendance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: 0.375rem;
+        }
+
+        .attendance-status {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .attendance-btn {
+            padding: 0.25rem 0.5rem;
+            border: none;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--gray-200);
+            color: var(--gray-600);
+        }
+
+        .attendance-btn.active {
+            color: white;
+        }
+
+        .attendance-btn.present.active {
+            background: var(--success);
+        }
+
+        .attendance-btn.absent.active {
+            background: var(--danger);
+        }
+
+        .attendance-record {
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: 0.375rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
             display: inline-block;
         }
 
-        .file-input-wrapper input[type=file] {
-            position: absolute;
-            left: -9999px;
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
         }
 
-        .file-input-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--info);
-            color: white;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
         }
 
-        .file-input-label:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-
             .chart-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .table-wrapper {
-                margin: 0 -1rem;
-                padding: 0 1rem;
-            }
-
-            th, td {
-                padding: 0.5rem;
-                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-top">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                        </svg>
-                    </div>
-                    <div class="logo-text">
-                        <h1>ZARNS Monitor</h1>
-                        <p>Sistema de Acompanhamento de Evolução</p>
-                    </div>
-                </div>
-                <div class="header-actions">
-                    <div class="dropdown">
-                        <button class="btn btn-white" onclick="toggleDropdown('dataMenu')">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                            </svg>
-                            Dados
-                        </button>
-                        <div class="dropdown-menu" id="dataMenu">
-                            <button class="dropdown-item" onclick="exportData()">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"></path>
-                                </svg>
-                                Exportar Dados
-                            </button>
-                            <div class="file-input-wrapper">
-                                <input type="file" id="importFile" accept=".json" onchange="importData(event)">
-                                <label for="importFile" class="dropdown-item" style="margin: 0;">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"></path>
-                                    </svg>
-                                    Importar Dados
-                                </label>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <button class="dropdown-item" onclick="clearAllData()">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14M10 11v6M14 11v6"></path>
-                                </svg>
-                                Limpar Todos os Dados
-                            </button>
-                        </div>
-                    </div>
-                    <button class="btn btn-success" onclick="showModal('evaluationModal')">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                        </svg>
-                        Lançar Avaliação
-                    </button>
-                </div>
-            </div>
+    <div class="header">
+        <div class="container">
+            <h1>ZARNS Monitor</h1>
+            <p style="opacity: 0.8; font-size: 0.875rem;">Sistema de Acompanhamento de Evolução</p>
         </div>
-    </header>
+    </div>
 
-    <!-- Main Content -->
     <div class="container">
-        <!-- Alert -->
-        <div class="alert alert-info" id="mainAlert">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-            <div>
-                <strong>Como funciona:</strong> Cadastre os alunos uma vez e lance as notas periodicamente. 
-                O sistema criará automaticamente gráficos de evolução para acompanhar o progresso individual e da turma.
-                <br><small>💾 Os dados são salvos automaticamente no navegador e podem ser exportados/importados.</small>
-            </div>
-        </div>
-
-        <!-- Statistics -->
+        <!-- Estatísticas -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
-                        </svg>
-                    </div>
-                </div>
                 <div class="stat-value" id="totalStudents">0</div>
                 <div class="stat-label">Total de Alunos</div>
             </div>
-
             <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon" style="color: var(--success);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                        </svg>
-                    </div>
-                </div>
                 <div class="stat-value" id="totalEvaluations">0</div>
                 <div class="stat-label">Avaliações Realizadas</div>
             </div>
-
             <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon" style="color: var(--info);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="20" x2="18" y2="10"></line>
-                            <line x1="12" y1="20" x2="12" y2="4"></line>
-                            <line x1="6" y1="20" x2="6" y2="14"></line>
-                        </svg>
-                    </div>
-                </div>
                 <div class="stat-value" id="avgLastEval">-</div>
                 <div class="stat-label">Média Última Avaliação</div>
             </div>
-
             <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon" style="color: var(--warning);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="stat-value" id="evolutionTrend">-</div>
-                <div class="stat-label">Tendência de Evolução</div>
+                <div class="stat-value" id="avgAttendance">-</div>
+                <div class="stat-label">Frequência Média (%)</div>
             </div>
         </div>
 
-        <!-- Charts -->
+        <!-- Botões de Ação -->
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+            <button class="btn" onclick="showModal('addStudentModal')">Adicionar Aluno</button>
+            <button class="btn btn-success" onclick="showModal('evaluationModal')">Lançar Avaliação</button>
+            <button class="btn" onclick="showModal('attendanceModal')">Registrar Presença</button>
+            <button class="btn" onclick="exportData()">Exportar Dados</button>
+            <input type="file" id="importFile" accept=".json" onchange="importData(event)" style="display: none;">
+            <button class="btn" onclick="document.getElementById('importFile').click()">Importar Dados</button>
+            <button class="btn btn-danger" onclick="clearAllData()">Limpar Todos os Dados</button>
+        </div>
+
+        <!-- Gráficos -->
         <div class="chart-grid">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Evolução do Desempenho da Turma</h3>
-                    <select class="form-control" style="width: 200px;" id="chartDisciplineFilter" onchange="updateCharts()">
-                        <option value="all">Todas as Disciplinas</option>
-                        <option value="0">Clínica Médica</option>
-                        <option value="1">Cirurgia</option>
-                        <option value="2">Gineco-Obstetrícia</option>
-                        <option value="3">Pediatria</option>
-                        <option value="4">MFC/SC</option>
-                        <option value="5">Saúde Mental</option>
-                    </select>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="evolutionChart"></canvas>
-                    </div>
+                <h3>Evolução das Médias</h3>
+                <div class="chart-container">
+                    <canvas id="evolutionChart"></canvas>
                 </div>
             </div>
-
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Comparativo por Disciplina - Última Avaliação</h3>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="disciplineChart"></canvas>
-                    </div>
+                <h3>Desempenho por Disciplina</h3>
+                <div class="chart-container">
+                    <canvas id="disciplineChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Main Tabs -->
+        <!-- Tabs -->
         <div class="tabs">
-            <div class="tab-nav">
-                <button class="tab-button active" onclick="switchTab('students')">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M8.5 7a4 4 0 100-8 4 4 0 000 8z"></path>
-                    </svg>
-                    Alunos Cadastrados
-                </button>
-                <button class="tab-button" onclick="switchTab('evaluations')">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                    Histórico de Avaliações
-                </button>
-                <button class="tab-button" onclick="switchTab('individual')">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
-                    Análise Individual
-                </button>
-            </div>
+            <button class="tab active" onclick="switchTab('students')">Alunos</button>
+            <button class="tab" onclick="switchTab('evaluations')">Avaliações</button>
+            <button class="tab" onclick="switchTab('attendance')">Frequência</button>
+            <button class="tab" onclick="switchTab('groups')">Análise por Grupos</button>
+            <button class="tab" onclick="switchTab('individual')">Análise Individual</button>
+        </div>
 
-            <!-- Students Tab -->
-            <div class="tab-content active" id="students-tab">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-                    <h3>Alunos Cadastrados</h3>
-                    <button class="btn btn-primary" onclick="showModal('addStudentModal')">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M8.5 7a4 4 0 100-8 4 4 0 000 8zM20 8v6M23 11h-6"></path>
-                        </svg>
-                        Adicionar Aluno
-                    </button>
-                </div>
-                
-                <div class="table-wrapper">
-                    <table>
+        <!-- Tab: Alunos -->
+        <div class="tab-content active" id="students-tab">
+            <div class="card">
+                <h3>Alunos Cadastrados</h3>
+                <div id="studentsTableContainer" style="margin-top: 1rem;">
+                    <table id="studentsTable" style="display: none;">
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Data de Cadastro</th>
-                                <th>Avaliações Realizadas</th>
+                                <th>Grupo</th>
+                                <th>Avaliações</th>
                                 <th>Última Média</th>
-                                <th>Evolução</th>
-                                <th>Ações</th>
+                                <th>Frequência</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
-                        <tbody id="studentsTableBody">
-                            <!-- Students will be rendered here -->
-                        </tbody>
+                        <tbody id="studentsTableBody"></tbody>
                     </table>
-                    <div id="emptyStudents" class="empty-state" style="display: none;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M8.5 7a4 4 0 100-8 4 4 0 000 8z"></path>
-                        </svg>
+                    <div id="emptyStudents" class="empty-state">
                         <p>Nenhum aluno cadastrado ainda.</p>
-                        <button class="btn btn-primary" onclick="showModal('addStudentModal')" style="margin-top: 1rem;">
-                            Cadastrar Primeiro Aluno
-                        </button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Evaluations Tab -->
-            <div class="tab-content" id="evaluations-tab">
-                <h3 style="margin-bottom: 1.5rem;">Histórico de Avaliações</h3>
-                <div id="evaluationsHistory">
-                    <!-- Evaluations will be rendered here -->
-                </div>
+        <!-- Tab: Avaliações -->
+        <div class="tab-content" id="evaluations-tab">
+            <div class="card">
+                <h3>Histórico de Avaliações</h3>
+                <div id="evaluationsHistory" style="margin-top: 1rem;"></div>
             </div>
+        </div>
 
-            <!-- Individual Analysis Tab -->
-            <div class="tab-content" id="individual-tab">
+        <!-- Tab: Frequência -->
+        <div class="tab-content" id="attendance-tab">
+            <div class="card">
+                <h3>Registros de Presença</h3>
+                <div id="attendanceHistory" style="margin-top: 1rem;"></div>
+            </div>
+        </div>
+
+        <!-- Tab: Análise por Grupos -->
+        <div class="tab-content" id="groups-tab">
+            <div class="card">
+                <h3>Análise Comparativa por Grupos</h3>
+                <div class="chart-grid">
+                    <div>
+                        <h4>Evolução das Médias por Grupo</h4>
+                        <div class="chart-container">
+                            <canvas id="groupEvolutionChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>Desempenho Atual por Grupo</h4>
+                        <div class="chart-container">
+                            <canvas id="groupComparisonChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <h4>Frequência por Grupo</h4>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="groupAttendanceChart"></canvas>
+                    </div>
+                </div>
+                
+                <div id="groupStats" style="margin-top: 2rem;"></div>
+            </div>
+        </div>
+
+        <!-- Tab: Análise Individual -->
+        <div class="tab-content" id="individual-tab">
+            <div class="card">
+                <h3>Análise Individual do Aluno</h3>
                 <div class="form-group">
                     <label class="form-label">Selecione o Aluno</label>
-                    <select class="form-control" id="individualStudentSelect" onchange="updateIndividualAnalysis()">
+                    <select class="form-control" id="individualSelect" onchange="updateIndividualAnalysis()">
                         <option value="">Escolha um aluno...</option>
                     </select>
                 </div>
-                <div id="individualAnalysis">
-                    <!-- Individual analysis will be rendered here -->
-                </div>
+                <div id="individualAnalysis"></div>
             </div>
         </div>
     </div>
 
-    <!-- Add Student Modal -->
+    <!-- Modal Adicionar Aluno -->
     <div class="modal" id="addStudentModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Cadastrar Novo Aluno</h2>
+                <h2 class="modal-title">Adicionar Aluno</h2>
                 <button class="modal-close" onclick="closeModal('addStudentModal')">&times;</button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control" id="studentName" required placeholder="Digite o nome do aluno">
+            <form onsubmit="saveStudent(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="studentName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Grupo</label>
+                        <select class="form-control" id="studentGroup" required>
+                            <option value="A">Grupo A</option>
+                            <option value="B">Grupo B</option>
+                            <option value="C">Grupo C</option>
+                            <option value="D">Grupo D</option>
+                            <option value="E">Grupo E</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="alert alert-info">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    <span>As notas serão lançadas posteriormente através do botão "Lançar Avaliação".</span>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="closeModal('addStudentModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" onclick="closeModal('addStudentModal')">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="saveStudent()">Cadastrar Aluno</button>
-            </div>
+            </form>
         </div>
     </div>
 
-    <!-- Launch Evaluation Modal -->
+    <!-- Modal Lançar Avaliação -->
     <div class="modal" id="evaluationModal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 800px;">
             <div class="modal-header">
-                <h2 class="modal-title">Lançar Nova Avaliação</h2>
+                <h2 class="modal-title">Lançar Avaliação</h2>
                 <button class="modal-close" onclick="closeModal('evaluationModal')">&times;</button>
             </div>
             <form onsubmit="launchEvaluation(event)">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="form-label">Nome da Avaliação</label>
-                        <input type="text" class="form-control" id="evaluationName" required placeholder="Ex: Simulado 1, Prova Mensal, etc">
+                        <input type="text" class="form-control" id="evaluationName" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label class="form-label">Data da Avaliação</label>
+                        <label class="form-label">Data</label>
                         <input type="date" class="form-control" id="evaluationDate" required>
                     </div>
-
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0 1rem;">
-                        <h4 style="margin: 0;">Lançar Notas dos Alunos</h4>
-                        <div>
-                            <button type="button" class="btn btn-sm btn-info" onclick="showImportTable()">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                    <line x1="3" y1="9" x2="21" y2="9"></line>
-                                    <line x1="9" y1="21" x2="9" y2="9"></line>
-                                </svg>
-                                Importar Tabela
-                            </button>
-                            <button type="button" class="btn btn-sm" onclick="toggleEvaluationView()">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                                <span id="toggleViewText">Ver Tabela</span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div id="evaluationStudentsList">
-                        <!-- Student grades inputs will be rendered here -->
-                    </div>
-                    
-                    <div id="evaluationTableView" style="display: none;">
-                        <!-- Table view will be rendered here -->
-                    </div>
+                    <div id="evaluationStudentsList"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" onclick="closeModal('evaluationModal')">Cancelar</button>
@@ -1093,857 +604,399 @@
         </div>
     </div>
 
-    <!-- Import Table Modal -->
-    <div class="modal" id="importTableModal">
-        <div class="modal-content" style="max-width: 800px;">
+    <!-- Modal Registrar Presença -->
+    <div class="modal" id="attendanceModal">
+        <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Importar Notas de Tabela</h2>
-                <button class="modal-close" onclick="closeModal('importTableModal')">&times;</button>
+                <h2 class="modal-title">Registrar Presença</h2>
+                <button class="modal-close" onclick="closeModal('attendanceModal')">&times;</button>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-info">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    <div>
-                        <strong>Como importar:</strong><br>
-                        1. Copie os dados do Excel com os nomes dos alunos na primeira coluna<br>
-                        2. As notas das disciplinas nas colunas seguintes (na ordem: Clínica Médica, Cirurgia, Gineco-Obstetrícia, Pediatria, MFC/SC, Saúde Mental)<br>
-                        3. Cole no campo abaixo e clique em "Processar"
+            <form onsubmit="saveAttendance(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Data</label>
+                        <input type="date" class="form-control" id="attendanceDate" required>
                     </div>
+                    <div id="attendanceList"></div>
                 </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Cole os dados da tabela aqui:</label>
-                    <textarea class="form-control" id="tableImportData" rows="10" placeholder="Nome&#9;Clínica&#9;Cirurgia&#9;Gineco&#9;Pediatria&#9;MFC/SC&#9;Saúde Mental&#10;João Silva&#9;85&#9;90&#9;75&#9;88&#9;92&#9;80"></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="closeModal('attendanceModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar Presença</button>
                 </div>
-                
-                <div id="importPreview" style="margin-top: 1rem;">
-                    <!-- Preview will be shown here -->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" onclick="closeModal('importTableModal')">Cancelar</button>
-                <button class="btn btn-primary" onclick="processTableImport()">Processar Dados</button>
-            </div>
+            </form>
         </div>
     </div>
 
     <script>
-        // Data
+        // Dados
         let students = [];
         let evaluations = [];
+        let attendanceRecords = [];
         let charts = {};
         const disciplines = ['Clínica Médica', 'Cirurgia', 'Gineco-Obstetrícia', 'Pediatria', 'MFC/SC', 'Saúde Mental'];
 
-        // Storage Key - Unique per file URL
-        const STORAGE_KEY = 'zarns_monitor_data_v2';
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                loadData();
-                renderAll();
-                
-                // Initialize charts after a small delay to ensure DOM is ready
-                setTimeout(() => {
-                    initCharts();
-                }, 100);
-                
-                checkDataStatus();
-                
-                // Set today's date as default
-                const dateInput = document.getElementById('evaluationDate');
-                if (dateInput) {
-                    dateInput.valueAsDate = new Date();
-                }
-                
-                // Close dropdowns when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!e.target.closest('.dropdown')) {
-                        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                            menu.classList.remove('show');
-                        });
-                    }
-                });
-                
-                console.log('Sistema inicializado com sucesso');
-                console.log('Alunos carregados:', students.length);
-                console.log('Avaliações carregadas:', evaluations.length);
-                
-            } catch (error) {
-                console.error('Erro na inicialização:', error);
-                showNotification('Erro ao inicializar o sistema', 'error');
-            }
-        });
-
-        // Check data status
-        function checkDataStatus() {
-            const hasData = students.length > 0 || evaluations.length > 0;
-            const alert = document.getElementById('mainAlert');
-            
-            if (hasData) {
-                const lastSave = localStorage.getItem(STORAGE_KEY + '_lastSave');
-                if (lastSave) {
-                    const date = new Date(lastSave);
-                    alert.innerHTML = `
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3"></path>
-                        </svg>
-                        <div>
-                            <strong>Dados carregados com sucesso!</strong> Última atualização: ${date.toLocaleString('pt-BR')}.
-                            <br><small>💾 Os dados são salvos automaticamente. Use o menu "Dados" para exportar ou importar.</small>
-                        </div>
-                    `;
-                    alert.className = 'alert alert-success';
-                }
-            }
-        }
-
-        // Load data
+        // Carregar dados do localStorage
         function loadData() {
-            try {
-                const savedData = localStorage.getItem(STORAGE_KEY);
-                if (savedData) {
-                    const data = JSON.parse(savedData);
-                    students = data.students || [];
-                    evaluations = data.evaluations || [];
-                    console.log('Dados carregados:', students.length, 'alunos,', evaluations.length, 'avaliações');
-                }
-            } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-                showNotification('Erro ao carregar dados salvos', 'error');
+            const saved = localStorage.getItem('zarns_data');
+            if (saved) {
+                const data = JSON.parse(saved);
+                students = data.students || [];
+                evaluations = data.evaluations || [];
+                attendanceRecords = data.attendanceRecords || [];
             }
+            renderAll();
+            updateCharts();
         }
 
-        // Save data
+        // Salvar dados no localStorage
         function saveData() {
-            try {
-                const data = {
-                    students: students,
-                    evaluations: evaluations,
-                    version: 2
-                };
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-                localStorage.setItem(STORAGE_KEY + '_lastSave', new Date().toISOString());
-                
-                // Also save to sessionStorage as backup
-                sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-                
-                console.log('Dados salvos com sucesso');
-            } catch (error) {
-                console.error('Erro ao salvar dados:', error);
-                showNotification('Erro ao salvar dados', 'error');
-            }
+            const data = { students, evaluations, attendanceRecords };
+            localStorage.setItem('zarns_data', JSON.stringify(data));
         }
 
-        // Toggle dropdown
-        function toggleDropdown(dropdownId) {
-            const dropdown = document.getElementById(dropdownId);
-            dropdown.classList.toggle('show');
-        }
-
-        // Export data
-        function exportData() {
-            const data = {
-                students: students,
-                evaluations: evaluations,
-                exportDate: new Date().toISOString(),
-                version: 2
-            };
-            
-            const json = JSON.stringify(data, null, 2);
-            const blob = new Blob([json], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `zarns_monitor_backup_${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            
-            showNotification('Dados exportados com sucesso!');
-            toggleDropdown('dataMenu');
-        }
-
-        // Import data
-        function importData(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    
-                    if (data.students && data.evaluations) {
-                        if (confirm('Isso substituirá todos os dados atuais. Deseja continuar?')) {
-                            students = data.students;
-                            evaluations = data.evaluations;
-                            saveData();
-                            renderAll();
-                            updateCharts();
-                            showNotification('Dados importados com sucesso!');
-                            checkDataStatus();
-                        }
-                    } else {
-                        throw new Error('Formato de arquivo inválido');
-                    }
-                } catch (error) {
-                    showNotification('Erro ao importar arquivo', 'error');
-                }
-                
-                // Reset input
-                event.target.value = '';
-            };
-            
-            reader.readAsText(file);
-            toggleDropdown('dataMenu');
-        }
-
-        // Clear all data
-        function clearAllData() {
-            if (confirm('ATENÇÃO: Isso apagará TODOS os dados permanentemente. Deseja continuar?')) {
-                if (confirm('Tem certeza? Esta ação não pode ser desfeita!')) {
-                    students = [];
-                    evaluations = [];
-                    saveData();
-                    renderAll();
-                    initCharts();
-                    showNotification('Todos os dados foram apagados');
-                    
-                    // Reset alert
-                    const alert = document.getElementById('mainAlert');
-                    alert.className = 'alert alert-info';
-                    alert.innerHTML = `
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                        </svg>
-                        <div>
-                            <strong>Como funciona:</strong> Cadastre os alunos uma vez e lance as notas periodicamente. 
-                            O sistema criará automaticamente gráficos de evolução para acompanhar o progresso individual e da turma.
-                            <br><small>💾 Os dados são salvos automaticamente no navegador e podem ser exportados/importados.</small>
-                        </div>
-                    `;
-                }
-            }
-            toggleDropdown('dataMenu');
-        }
-
-        // Render all
+        // Renderizar tudo
         function renderAll() {
-            updateStats();
             renderStudents();
+            renderStats();
             renderEvaluations();
-            updateStudentSelects();
-            // Don't call updateCharts here - wait for charts to be initialized
+            renderAttendance();
+            updateIndividualSelect();
         }
 
-        // Update statistics
-        function updateStats() {
+        // Renderizar estatísticas
+        function renderStats() {
             document.getElementById('totalStudents').textContent = students.length;
             document.getElementById('totalEvaluations').textContent = evaluations.length;
-            
-            // Get last evaluation average
+
+            // Média da última avaliação
             if (evaluations.length > 0) {
                 const lastEval = evaluations[evaluations.length - 1];
                 let totalAvg = 0;
                 let count = 0;
-                
-                Object.values(lastEval.grades).forEach(studentGrades => {
-                    const avg = calculateAverage(Object.values(studentGrades));
+
+                for (const studentId in lastEval.grades) {
+                    const grades = lastEval.grades[studentId];
+                    const avg = grades.reduce((a, b) => a + b, 0) / grades.length;
                     totalAvg += avg;
                     count++;
-                });
-                
-                if (count > 0) {
-                    document.getElementById('avgLastEval').textContent = (totalAvg / count).toFixed(1) + '%';
                 }
-                
-                // Calculate evolution trend
-                if (evaluations.length >= 2) {
-                    const secondLastEval = evaluations[evaluations.length - 2];
-                    let secondLastAvg = 0;
-                    let count2 = 0;
-                    
-                    Object.values(secondLastEval.grades).forEach(studentGrades => {
-                        const avg = calculateAverage(Object.values(studentGrades));
-                        secondLastAvg += avg;
-                        count2++;
+
+                if (count > 0) {
+                    document.getElementById('avgLastEval').textContent = (totalAvg / count).toFixed(1);
+                }
+            }
+
+            // Frequência média
+            if (attendanceRecords.length > 0 && students.length > 0) {
+                let totalPresences = 0;
+                let totalPossible = 0;
+
+                attendanceRecords.forEach(record => {
+                    students.forEach(student => {
+                        if (record.attendance[student.id]) {
+                            totalPossible++;
+                            if (record.attendance[student.id] === 'present') {
+                                totalPresences++;
+                            }
+                        }
                     });
-                    
-                    if (count2 > 0) {
-                        const diff = (totalAvg / count) - (secondLastAvg / count2);
-                        const trend = diff > 0 ? `+${diff.toFixed(1)}%` : `${diff.toFixed(1)}%`;
-                        document.getElementById('evolutionTrend').textContent = trend;
-                        document.getElementById('evolutionTrend').style.color = diff > 0 ? 'var(--success)' : 'var(--danger)';
-                    }
+                });
+
+                if (totalPossible > 0) {
+                    const avgAttendance = (totalPresences / totalPossible * 100).toFixed(1);
+                    document.getElementById('avgAttendance').textContent = avgAttendance;
                 }
             }
         }
 
-        // Calculate average
-        function calculateAverage(grades) {
-            return grades.reduce((a, b) => a + b, 0) / grades.length;
-        }
-
-        // Render students
+        // Renderizar alunos
         function renderStudents() {
             const tbody = document.getElementById('studentsTableBody');
+            const table = document.getElementById('studentsTable');
             const empty = document.getElementById('emptyStudents');
-            
-            tbody.innerHTML = '';
-            
+
             if (students.length === 0) {
+                table.style.display = 'none';
                 empty.style.display = 'block';
                 return;
             }
-            
+
+            table.style.display = 'table';
             empty.style.display = 'none';
-            
-            students.forEach(student => {
+
+            tbody.innerHTML = students.map(student => {
                 const studentEvals = evaluations.filter(e => e.grades[student.id]);
                 const lastEval = studentEvals[studentEvals.length - 1];
                 let lastAvg = '-';
-                let evolution = '-';
-                
-                if (lastEval) {
-                    const grades = Object.values(lastEval.grades[student.id]);
-                    lastAvg = calculateAverage(grades).toFixed(1) + '%';
-                    
-                    // Calculate evolution
-                    if (studentEvals.length >= 2) {
-                        const secondLast = studentEvals[studentEvals.length - 2];
-                        const secondLastGrades = Object.values(secondLast.grades[student.id]);
-                        const secondLastAvg = calculateAverage(secondLastGrades);
-                        const diff = calculateAverage(grades) - secondLastAvg;
-                        evolution = diff > 0 ? `↑ ${diff.toFixed(1)}%` : diff < 0 ? `↓ ${Math.abs(diff).toFixed(1)}%` : '→ 0%';
-                    }
+
+                if (lastEval && lastEval.grades[student.id]) {
+                    const grades = lastEval.grades[student.id];
+                    lastAvg = (grades.reduce((a, b) => a + b, 0) / grades.length).toFixed(1);
                 }
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><strong>${student.name}</strong></td>
-                    <td>${new Date(student.createdAt).toLocaleDateString('pt-BR')}</td>
-                    <td>${studentEvals.length}</td>
-                    <td>${lastAvg}</td>
-                    <td style="color: ${evolution.includes('↑') ? 'var(--success)' : evolution.includes('↓') ? 'var(--danger)' : 'var(--gray-600)'}">
-                        ${evolution}
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-danger" onclick="deleteStudent(${student.id})">Excluir</button>
-                    </td>
+
+                // Calcular frequência
+                let presences = 0;
+                let total = 0;
+                attendanceRecords.forEach(record => {
+                    if (record.attendance[student.id]) {
+                        total++;
+                        if (record.attendance[student.id] === 'present') {
+                            presences++;
+                        }
+                    }
+                });
+                const attendance = total > 0 ? ((presences / total) * 100).toFixed(0) + '%' : '-';
+
+                return `
+                    <tr>
+                        <td>${student.name}</td>
+                        <td>Grupo ${student.group}</td>
+                        <td>${studentEvals.length}</td>
+                        <td>${lastAvg}</td>
+                        <td>${attendance}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="removeStudent(${student.id})">Remover</button>
+                        </td>
+                    </tr>
                 `;
-                tbody.appendChild(row);
-            });
+            }).join('');
         }
 
-        // Render evaluations
+        // Renderizar avaliações
         function renderEvaluations() {
             const container = document.getElementById('evaluationsHistory');
-            
+
             if (evaluations.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        <p>Nenhuma avaliação lançada ainda.</p>
-                        <button class="btn btn-success" onclick="showModal('evaluationModal')" style="margin-top: 1rem;">
-                            Lançar Primeira Avaliação
-                        </button>
-                    </div>
-                `;
+                container.innerHTML = '<p class="empty-state">Nenhuma avaliação realizada ainda.</p>';
                 return;
             }
-            
-            container.innerHTML = evaluations.map((eval, index) => {
-                let totalAvg = 0;
+
+            container.innerHTML = evaluations.slice().reverse().map(eval => {
+                let avgTotal = 0;
                 let count = 0;
-                
-                Object.values(eval.grades).forEach(studentGrades => {
-                    const avg = calculateAverage(Object.values(studentGrades));
-                    totalAvg += avg;
-                    count++;
-                });
-                
-                const avgGrade = count > 0 ? (totalAvg / count).toFixed(1) : '0';
-                
+
+                const studentRows = students.map(student => {
+                    if (eval.grades[student.id]) {
+                        const grades = eval.grades[student.id];
+                        const avg = grades.reduce((a, b) => a + b, 0) / grades.length;
+                        avgTotal += avg;
+                        count++;
+
+                        const gradeDetails = disciplines.map((disc, i) => 
+                            `${disc}: ${grades[i].toFixed(1)}`
+                        ).join(' | ');
+
+                        return `
+                            <tr>
+                                <td>${student.name}</td>
+                                <td>${avg.toFixed(1)}</td>
+                                <td style="font-size: 0.75rem; color: var(--gray-600);">${gradeDetails}</td>
+                            </tr>
+                        `;
+                    }
+                    return null;
+                }).filter(Boolean).join('');
+
+                const classAvg = count > 0 ? (avgTotal / count).toFixed(1) : '-';
+
                 return `
-                    <div class="card" style="margin-bottom: 1rem;">
-                        <div class="card-header">
-                            <div>
-                                <h4 style="margin: 0;">${eval.name}</h4>
-                                <p style="margin: 0.25rem 0 0; color: var(--gray-600); font-size: 0.875rem;">
-                                    ${new Date(eval.date).toLocaleDateString('pt-BR')}
-                                </p>
-                            </div>
-                            <div style="text-align: right;">
-                                <div class="stat-value" style="font-size: 1.5rem;">${avgGrade}%</div>
-                                <div class="stat-label">Média Geral</div>
+                    <div class="attendance-record">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <strong>${eval.name}</strong>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <span style="color: var(--gray-600); font-size: 0.875rem;">${new Date(eval.date).toLocaleDateString('pt-BR')}</span>
+                                <button class="btn btn-sm" onclick="editEvaluation(${eval.id})">Editar</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteEvaluation(${eval.id})">Excluir</button>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <button class="btn btn-sm" onclick="viewEvaluationDetails(${index})">
-                                Ver Detalhes
-                            </button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteEvaluation(${index})">
-                                Excluir
-                            </button>
+                        <div style="margin-bottom: 1rem;">
+                            Média da turma: <strong style="font-size: 1.25rem; color: var(--primary);">${classAvg}</strong>
                         </div>
+                        <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Média</th>
+                                    <th>Notas por Disciplina</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${studentRows}
+                            </tbody>
+                        </table>
                     </div>
                 `;
             }).join('');
         }
 
-        // Update student selects
-        function updateStudentSelects() {
-            const select = document.getElementById('individualStudentSelect');
-            select.innerHTML = '<option value="">Escolha um aluno...</option>';
-            
-            students.forEach(student => {
-                const option = document.createElement('option');
-                option.value = student.id;
-                option.textContent = student.name;
-                select.appendChild(option);
-            });
-        }
+        // Renderizar frequência
+        function renderAttendance() {
+            const container = document.getElementById('attendanceHistory');
 
-        // Save student
-        function saveStudent() {
-            const nameInput = document.getElementById('studentName');
-            const name = nameInput.value.trim();
-            
-            if (!name) {
-                showNotification('Por favor, digite o nome do aluno', 'error');
+            if (attendanceRecords.length === 0) {
+                container.innerHTML = '<p class="empty-state">Nenhum registro de presença ainda.</p>';
                 return;
             }
-            
-            // Check if already exists
-            if (students.find(s => s.name.toLowerCase() === name.toLowerCase())) {
-                showNotification('Já existe um aluno com esse nome', 'error');
+
+            container.innerHTML = attendanceRecords.slice().reverse().map(record => {
+                let presentes = 0;
+                let ausentes = 0;
+
+                const studentList = students.map(student => {
+                    const status = record.attendance[student.id];
+                    if (status === 'present') presentes++;
+                    else if (status === 'absent') ausentes++;
+
+                    const badge = status === 'present' ? 
+                        '<span class="badge badge-success">Presente</span>' :
+                        '<span class="badge badge-danger">Ausente</span>';
+
+                    return status ? `<li>${student.name}: ${badge}</li>` : '';
+                }).filter(Boolean).join('');
+
+                return `
+                    <div class="attendance-record">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <strong>${new Date(record.date).toLocaleDateString('pt-BR')}</strong>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div>
+                                    <span style="color: var(--success); margin-right: 1rem;">Presentes: ${presentes}</span>
+                                    <span style="color: var(--danger);">Ausentes: ${ausentes}</span>
+                                </div>
+                                <button class="btn btn-danger btn-sm" onclick="deleteAttendance(${record.id})">Excluir</button>
+                            </div>
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            ${studentList}
+                        </ul>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Atualizar select de análise individual
+        function updateIndividualSelect() {
+            const select = document.getElementById('individualSelect');
+            select.innerHTML = '<option value="">Escolha um aluno...</option>' +
+                students.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+        }
+
+        // Atualizar análise individual
+        function updateIndividualAnalysis() {
+            const studentId = parseInt(document.getElementById('individualSelect').value);
+            const container = document.getElementById('individualAnalysis');
+
+            if (!studentId) {
+                container.innerHTML = '';
                 return;
             }
-            
-            // Create new student
-            const newStudent = {
-                id: Date.now(),
-                name: name,
-                createdAt: new Date().toISOString()
-            };
-            
-            // Add to array
-            students.push(newStudent);
-            
-            // Save to localStorage
-            saveData();
-            
-            // Update UI
-            renderAll();
-            
-            // Close modal
-            closeModal('addStudentModal');
-            
-            // Clear input
-            nameInput.value = '';
-            
-            // Show success
-            showNotification('Aluno cadastrado com sucesso!');
-            
-            console.log('Aluno cadastrado:', newStudent);
-        }
 
-        // Delete student
-        function deleteStudent(id) {
-            if (confirm('Tem certeza que deseja excluir este aluno? Todas as notas relacionadas serão perdidas.')) {
-                students = students.filter(s => s.id !== id);
-                
-                // Remove student grades from evaluations
-                evaluations.forEach(eval => {
-                    delete eval.grades[id];
-                });
-                
-                saveData();
-                renderAll();
-                showNotification('Aluno excluído!');
-            }
-        }
+            const student = students.find(s => s.id === studentId);
+            const studentEvals = evaluations.filter(e => e.grades[studentId]);
 
-        // Show modal
-        function showModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (!modal) return;
-            
-            if (modalId === 'evaluationModal') {
-                renderEvaluationForm();
-            }
-            
-            modal.classList.add('active');
-            
-            // Focus on first input
-            if (modalId === 'addStudentModal') {
-                setTimeout(() => {
-                    const input = document.getElementById('studentName');
-                    if (input) input.focus();
-                }, 100);
-            }
-        }
+            // Calcular estatísticas
+            let allGrades = [];
+            let gradesByDiscipline = {};
+            disciplines.forEach(d => gradesByDiscipline[d] = []);
 
-        // Close modal
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
-            }
-        }
-
-        // Toggle evaluation view
-        function toggleEvaluationView() {
-            const formView = document.getElementById('evaluationStudentsList');
-            const tableView = document.getElementById('evaluationTableView');
-            const toggleText = document.getElementById('toggleViewText');
-            
-            if (formView.style.display === 'none') {
-                formView.style.display = 'block';
-                tableView.style.display = 'none';
-                toggleText.textContent = 'Ver Tabela';
-            } else {
-                formView.style.display = 'none';
-                tableView.style.display = 'block';
-                toggleText.textContent = 'Ver Formulário';
-                renderEvaluationTable();
-            }
-        }
-
-        // Show import table modal
-        function showImportTable() {
-            showModal('importTableModal');
-        }
-
-        // Process table import
-        function processTableImport() {
-            const data = document.getElementById('tableImportData').value.trim();
-            if (!data) {
-                showNotification('Por favor, cole os dados da tabela', 'error');
-                return;
-            }
-            
-            const lines = data.split('\n').filter(line => line.trim());
-            const processedData = [];
-            
-            lines.forEach((line, index) => {
-                if (index === 0 && line.toLowerCase().includes('nome')) {
-                    // Skip header if present
-                    return;
-                }
-                
-                const cells = line.split('\t');
-                if (cells.length < 2) {
-                    // Try splitting by multiple spaces if no tabs
-                    const cells2 = line.split(/\s{2,}/);
-                    if (cells2.length >= 2) {
-                        cells.length = 0;
-                        cells.push(...cells2);
-                    }
-                }
-                
-                if (cells.length >= 2) {
-                    const studentName = cells[0].trim();
-                    const grades = cells.slice(1, 7).map(g => {
-                        const grade = parseFloat(g);
-                        return isNaN(grade) ? 0 : grade;
-                    });
-                    
-                    // Ensure we have 6 grades
-                    while (grades.length < 6) {
-                        grades.push(0);
-                    }
-                    
-                    processedData.push({ name: studentName, grades: grades });
-                }
-            });
-            
-            if (processedData.length === 0) {
-                showNotification('Nenhum dado válido encontrado', 'error');
-                return;
-            }
-            
-            // Apply imported data
-            processedData.forEach(data => {
-                // Find or create student
-                let student = students.find(s => s.name.toLowerCase() === data.name.toLowerCase());
-                if (!student) {
-                    // Auto-create student if not exists
-                    student = {
-                        id: Date.now() + Math.random(),
-                        name: data.name,
-                        createdAt: new Date().toISOString()
-                    };
-                    students.push(student);
-                }
-                
-                // Set grades in form
-                data.grades.forEach((grade, i) => {
-                    const input = document.getElementById(`grade_${student.id}_${i}`);
-                    if (input) {
-                        input.value = grade;
-                    }
+            studentEvals.forEach(eval => {
+                const grades = eval.grades[studentId];
+                grades.forEach((grade, i) => {
+                    allGrades.push(grade);
+                    gradesByDiscipline[disciplines[i]].push(grade);
                 });
             });
-            
-            saveData();
-            renderEvaluationForm(); // Re-render to include new students
-            closeModal('importTableModal');
-            showNotification(`${processedData.length} aluno(s) importado(s) com sucesso!`);
-        }
 
-        // Render evaluation table view
-        function renderEvaluationTable() {
-            const container = document.getElementById('evaluationTableView');
-            
-            if (students.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: var(--gray-500);">Cadastre alunos primeiro.</p>';
-                return;
-            }
-            
-            let tableHtml = `
-                <div class="alert alert-warning">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    <span>Edite as notas diretamente na tabela. As alterações são aplicadas automaticamente.</span>
-                </div>
-                <div class="table-wrapper">
-                    <table>
+            const overallAvg = allGrades.length > 0 ? 
+                (allGrades.reduce((a, b) => a + b, 0) / allGrades.length).toFixed(1) : '-';
+
+            // Calcular frequência
+            let presences = 0;
+            let total = 0;
+            attendanceRecords.forEach(record => {
+                if (record.attendance[studentId]) {
+                    total++;
+                    if (record.attendance[studentId] === 'present') {
+                        presences++;
+                    }
+                }
+            });
+            const attendanceRate = total > 0 ? ((presences / total) * 100).toFixed(0) : 0;
+
+            // Gerar HTML
+            container.innerHTML = `
+                <div style="margin-top: 2rem;">
+                    <h4>${student.name} - Grupo ${student.group}</h4>
+                    
+                    <div class="stats-grid" style="margin: 2rem 0;">
+                        <div class="stat-card">
+                            <div class="stat-value">${overallAvg}</div>
+                            <div class="stat-label">Média Geral</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${attendanceRate}%</div>
+                            <div class="stat-label">Frequência</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${studentEvals.length}</div>
+                            <div class="stat-label">Avaliações</div>
+                        </div>
+                    </div>
+
+                    <h5>Médias por Disciplina</h5>
+                    <table style="margin-top: 1rem;">
                         <thead>
                             <tr>
-                                <th>Nome do Aluno</th>
-                                ${disciplines.map(d => `<th>${d}</th>`).join('')}
+                                <th>Disciplina</th>
                                 <th>Média</th>
+                                <th>Avaliações</th>
                             </tr>
                         </thead>
                         <tbody>
-            `;
-            
-            students.forEach(student => {
-                const grades = [];
-                let sum = 0;
-                
-                disciplines.forEach((disc, i) => {
-                    const input = document.getElementById(`grade_${student.id}_${i}`);
-                    const value = input ? parseFloat(input.value) || 0 : 0;
-                    grades.push(value);
-                    sum += value;
-                });
-                
-                const avg = sum / disciplines.length;
-                
-                tableHtml += `
-                    <tr>
-                        <td><strong>${student.name}</strong></td>
-                        ${disciplines.map((disc, i) => `
-                            <td>
-                                <input type="number" 
-                                       style="width: 60px; padding: 0.25rem; border: 1px solid var(--gray-300); border-radius: 0.25rem;"
-                                       min="0" 
-                                       max="100" 
-                                       step="0.1"
-                                       value="${grades[i]}"
-                                       onchange="updateGradeFromTable(${student.id}, ${i}, this.value)">
-                            </td>
-                        `).join('')}
-                        <td style="font-weight: 700; color: ${avg >= 70 ? 'var(--success)' : avg >= 50 ? 'var(--warning)' : 'var(--danger)'}">
-                            ${avg.toFixed(1)}%
-                        </td>
-                    </tr>
-                `;
-            });
-            
-            tableHtml += `
+                            ${disciplines.map(disc => {
+                                const grades = gradesByDiscipline[disc];
+                                const avg = grades.length > 0 ?
+                                    (grades.reduce((a, b) => a + b, 0) / grades.length).toFixed(1) : '-';
+                                return `
+                                    <tr>
+                                        <td>${disc}</td>
+                                        <td>${avg}</td>
+                                        <td>${grades.length}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
                         </tbody>
                     </table>
-                </div>
-            `;
-            
-            container.innerHTML = tableHtml;
-        }
 
-        // Update grade from table
-        function updateGradeFromTable(studentId, disciplineIndex, value) {
-            const input = document.getElementById(`grade_${studentId}_${disciplineIndex}`);
-            if (input) {
-                input.value = value;
-                // Re-render table to update average
-                renderEvaluationTable();
-            }
-        }
-
-        // Render evaluation form
-        function renderEvaluationForm() {
-            const container = document.getElementById('evaluationStudentsList');
-            
-            if (students.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: var(--gray-500);">Cadastre alunos primeiro.</p>';
-                return;
-            }
-            
-            container.innerHTML = students.map(student => `
-                <div class="card" style="margin-bottom: 1rem;">
-                    <div class="card-body">
-                        <h4 style="margin: 0 0 1rem;">${student.name}</h4>
-                        <div class="form-grid">
-                            ${disciplines.map((disc, i) => `
-                                <div class="form-group" style="margin-bottom: 0.75rem;">
-                                    <label class="form-label" style="font-size: 0.75rem;">${disc}</label>
-                                    <input type="number" 
-                                           class="form-control" 
-                                           id="grade_${student.id}_${i}" 
-                                           min="0" 
-                                           max="100" 
-                                           step="0.1" 
-                                           placeholder="0-100"
-                                           required>
-                                </div>
-                            `).join('')}
-                        </div>
+                    <h5 style="margin-top: 2rem;">Evolução nas Avaliações</h5>
+                    <div class="chart-container">
+                        <canvas id="individualChart"></canvas>
                     </div>
                 </div>
-            `).join('');
-        }
+            `;
 
-        // Launch evaluation
-        function launchEvaluation(event) {
-            event.preventDefault();
-            
-            const evaluationName = document.getElementById('evaluationName').value.trim();
-            const evaluationDate = document.getElementById('evaluationDate').value;
-            
-            if (!evaluationName || !evaluationDate) {
-                showNotification('Por favor, preencha todos os campos', 'error');
-                return;
+            // Criar gráfico individual
+            if (charts.individual) {
+                charts.individual.destroy();
             }
-            
-            const evaluation = {
-                id: Date.now(),
-                name: evaluationName,
-                date: evaluationDate,
-                grades: {}
-            };
-            
-            // Collect grades for each student
-            let hasGrades = false;
-            students.forEach(student => {
-                evaluation.grades[student.id] = {};
-                disciplines.forEach((disc, i) => {
-                    const gradeInput = document.getElementById(`grade_${student.id}_${i}`);
-                    if (gradeInput) {
-                        const value = parseFloat(gradeInput.value) || 0;
-                        evaluation.grades[student.id][i] = value;
-                        if (value > 0) hasGrades = true;
-                    }
-                });
+
+            const ctx = document.getElementById('individualChart').getContext('2d');
+            const labels = studentEvals.map(e => e.name);
+            const data = studentEvals.map(e => {
+                const grades = e.grades[studentId];
+                return grades.reduce((a, b) => a + b, 0) / grades.length;
             });
-            
-            if (!hasGrades) {
-                showNotification('Por favor, lance pelo menos uma nota', 'error');
-                return;
-            }
-            
-            evaluations.push(evaluation);
-            evaluations.sort((a, b) => new Date(a.date) - new Date(b.date)); // Keep chronological order
-            
-            saveData();
-            renderAll();
-            closeModal('evaluationModal');
-            
-            // Clear form
-            document.getElementById('evaluationName').value = '';
-            
-            showNotification('Avaliação lançada com sucesso!');
-        }
 
-        // Delete evaluation
-        function deleteEvaluation(index) {
-            if (confirm('Tem certeza que deseja excluir esta avaliação?')) {
-                evaluations.splice(index, 1);
-                saveData();
-                renderAll();
-                showNotification('Avaliação excluída!');
-            }
-        }
-
-        // Initialize charts
-        function initCharts() {
-            // Destroy existing charts if they exist
-            if (charts.evolution) {
-                charts.evolution.destroy();
-            }
-            if (charts.discipline) {
-                charts.discipline.destroy();
-            }
-            
-            // Evolution Chart
-            const ctx1 = document.getElementById('evolutionChart').getContext('2d');
-            charts.evolution = new Chart(ctx1, {
+            charts.individual = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [],
-                    datasets: []
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%';
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Discipline Chart
-            const ctx2 = document.getElementById('disciplineChart').getContext('2d');
-            charts.discipline = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: disciplines,
+                    labels: labels,
                     datasets: [{
-                        label: 'Média da Última Avaliação',
-                        data: [0, 0, 0, 0, 0, 0],
-                        backgroundColor: 'rgba(124, 58, 237, 0.5)',
-                        borderColor: 'rgb(124, 58, 237)',
-                        borderWidth: 1
+                        label: 'Média',
+                        data: data,
+                        borderColor: 'rgb(55, 48, 163)',
+                        backgroundColor: 'rgba(55, 48, 163, 0.1)',
+                        tension: 0.1
                     }]
                 },
                 options: {
@@ -1952,233 +1005,254 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%';
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return 'Média: ' + context.parsed.y.toFixed(1) + '%';
-                                }
-                            }
+                            max: 10
                         }
                     }
                 }
             });
-            
-            // Update charts with current data
-            updateCharts();
         }
 
-        // Update charts
-        function updateCharts() {
-            if (!charts.evolution || !charts.discipline) {
-                console.error('Gráficos não inicializados');
+        // Adicionar aluno
+        function saveStudent(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('studentName').value;
+            const group = document.getElementById('studentGroup').value;
+
+            const newStudent = {
+                id: Date.now(),
+                name,
+                group
+            };
+
+            students.push(newStudent);
+            saveData();
+            renderAll();
+            updateCharts();
+            closeModal('addStudentModal');
+            showNotification('Aluno adicionado com sucesso!');
+
+            // Limpar formulário
+            document.getElementById('studentName').value = '';
+            document.getElementById('studentGroup').value = 'A';
+        }
+
+        // Remover aluno
+        function removeStudent(id) {
+            if (confirm('Tem certeza que deseja remover este aluno?')) {
+                students = students.filter(s => s.id !== id);
+                saveData();
+                renderAll();
+                updateCharts();
+                showNotification('Aluno removido com sucesso!');
+            }
+        }
+
+        // Lançar avaliação
+        function launchEvaluation(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('evaluationName').value;
+            const date = document.getElementById('evaluationDate').value;
+
+            const newEval = {
+                id: Date.now(),
+                name,
+                date,
+                grades: {}
+            };
+
+            // Coletar notas
+            students.forEach(student => {
+                const grades = [];
+                disciplines.forEach((disc, index) => {
+                    const input = document.getElementById(`grade_${student.id}_${index}`);
+                    if (input) {
+                        grades.push(parseFloat(input.value) || 0);
+                    }
+                });
+                newEval.grades[student.id] = grades;
+            });
+
+            evaluations.push(newEval);
+            saveData();
+            renderAll();
+            updateCharts();
+            closeModal('evaluationModal');
+            showNotification('Avaliação lançada com sucesso!');
+        }
+
+        // Salvar presença
+        function saveAttendance(event) {
+            event.preventDefault();
+
+            const date = document.getElementById('attendanceDate').value;
+            const attendance = {};
+
+            students.forEach(student => {
+                const presentBtn = document.querySelector(`#attendance_${student.id}_present`);
+                const absentBtn = document.querySelector(`#attendance_${student.id}_absent`);
+                
+                if (presentBtn && presentBtn.classList.contains('active')) {
+                    attendance[student.id] = 'present';
+                } else if (absentBtn && absentBtn.classList.contains('active')) {
+                    attendance[student.id] = 'absent';
+                }
+            });
+
+            const newRecord = {
+                id: Date.now(),
+                date,
+                attendance
+            };
+
+            attendanceRecords.push(newRecord);
+            saveData();
+            renderAll();
+            closeModal('attendanceModal');
+            showNotification('Presença registrada com sucesso!');
+        }
+
+        // Toggle presença
+        function toggleAttendance(studentId, status) {
+            const presentBtn = document.querySelector(`#attendance_${studentId}_present`);
+            const absentBtn = document.querySelector(`#attendance_${studentId}_absent`);
+
+            presentBtn.classList.remove('active');
+            absentBtn.classList.remove('active');
+
+            if (status === 'present') {
+                presentBtn.classList.add('active');
+            } else {
+                absentBtn.classList.add('active');
+            }
+        }
+
+        // Mostrar modal
+        function showModal(modalId) {
+            if (modalId === 'evaluationModal') {
+                renderEvaluationForm();
+            } else if (modalId === 'attendanceModal') {
+                renderAttendanceForm();
+            }
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        // Fechar modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Renderizar formulário de avaliação
+        function renderEvaluationForm() {
+            const container = document.getElementById('evaluationStudentsList');
+
+            if (students.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray-500); margin-top: 2rem;">Adicione alunos primeiro.</p>';
                 return;
             }
-            
-            const filter = document.getElementById('chartDisciplineFilter').value;
-            
-            // Update evolution chart
-            if (evaluations.length > 0) {
-                const labels = evaluations.map(e => new Date(e.date).toLocaleDateString('pt-BR'));
-                const datasets = [];
-                
-                if (filter === 'all') {
-                    // Show overall average
-                    const data = evaluations.map(eval => {
-                        let total = 0;
-                        let count = 0;
-                        Object.values(eval.grades).forEach(studentGrades => {
-                            const avg = calculateAverage(Object.values(studentGrades));
-                            total += avg;
-                            count++;
-                        });
-                        return count > 0 ? total / count : 0;
-                    });
-                    
-                    datasets.push({
-                        label: 'Média Geral',
-                        data: data,
-                        borderColor: 'rgb(55, 48, 163)',
-                        backgroundColor: 'rgba(55, 48, 163, 0.1)',
-                        tension: 0.4
-                    });
-                } else {
-                    // Show specific discipline for all students
-                    const discIndex = parseInt(filter);
-                    students.forEach((student, idx) => {
-                        const data = [];
-                        evaluations.forEach(eval => {
-                            if (eval.grades[student.id] && eval.grades[student.id][discIndex] !== undefined) {
-                                data.push(eval.grades[student.id][discIndex]);
-                            }
-                        });
-                        
-                        if (data.length > 0) {
-                            // Use consistent colors for students
-                            const hue = (idx * 360 / students.length) % 360;
-                            datasets.push({
-                                label: student.name,
-                                data: data,
-                                borderColor: `hsl(${hue}, 70%, 50%)`,
-                                backgroundColor: 'transparent',
-                                tension: 0.4
-                            });
-                        }
-                    });
-                }
-                
-                charts.evolution.data.labels = labels;
-                charts.evolution.data.datasets = datasets;
-                charts.evolution.update();
-                
-                console.log('Gráfico de evolução atualizado:', datasets.length, 'datasets');
-            } else {
-                // Clear chart if no evaluations
-                charts.evolution.data.labels = [];
-                charts.evolution.data.datasets = [];
-                charts.evolution.update();
+
+            container.innerHTML = '<h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Notas por Disciplina:</h4>' +
+                students.map(student => `
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: var(--gray-50); border-radius: 0.375rem;">
+                        <h5 style="margin-bottom: 0.75rem;">${student.name} (Grupo ${student.group})</h5>
+                        <div class="form-grid">
+                            ${disciplines.map((disc, index) => `
+                                <div>
+                                    <label style="font-size: 0.75rem; color: var(--gray-600);">${disc}</label>
+                                    <input type="number" 
+                                           id="grade_${student.id}_${index}"
+                                           class="form-control grade-input" 
+                                           min="0" 
+                                           max="10" 
+                                           step="0.1"
+                                           required>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+        }
+
+        // Renderizar formulário de presença
+        function renderAttendanceForm() {
+            const container = document.getElementById('attendanceList');
+
+            if (students.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray-500); margin-top: 2rem;">Adicione alunos primeiro.</p>';
+                return;
             }
-            
-            // Update discipline chart with last evaluation
+
+            container.innerHTML = '<div class="attendance-grid">' +
+                students.map(student => `
+                    <div class="attendance-item">
+                        <span>${student.name}</span>
+                        <div class="attendance-status">
+                            <button type="button" 
+                                    id="attendance_${student.id}_present"
+                                    class="attendance-btn present active" 
+                                    onclick="toggleAttendance(${student.id}, 'present')">
+                                Presente
+                            </button>
+                            <button type="button" 
+                                    id="attendance_${student.id}_absent"
+                                    class="attendance-btn absent" 
+                                    onclick="toggleAttendance(${student.id}, 'absent')">
+                                Ausente
+                            </button>
+                        </div>
+                    </div>
+                `).join('') +
+            '</div>';
+        }
+
+        // Switch tab
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Atualizar gráficos
+        function updateCharts() {
+            // Gráfico de evolução
+            if (charts.evolution) {
+                charts.evolution.destroy();
+            }
+
             if (evaluations.length > 0) {
-                const lastEval = evaluations[evaluations.length - 1];
-                const disciplineAvgs = disciplines.map((disc, i) => {
+                const ctx1 = document.getElementById('evolutionChart').getContext('2d');
+                const labels = evaluations.map(e => e.name);
+                const data = evaluations.map(eval => {
                     let total = 0;
                     let count = 0;
-                    Object.values(lastEval.grades).forEach(studentGrades => {
-                        if (studentGrades[i] !== undefined) {
-                            total += studentGrades[i];
-                            count++;
-                        }
-                    });
+                    for (const studentId in eval.grades) {
+                        const grades = eval.grades[studentId];
+                        total += grades.reduce((a, b) => a + b, 0) / grades.length;
+                        count++;
+                    }
                     return count > 0 ? total / count : 0;
                 });
-                
-                charts.discipline.data.datasets[0].data = disciplineAvgs;
-                charts.discipline.update();
-                
-                console.log('Gráfico de disciplinas atualizado:', disciplineAvgs);
-            } else {
-                // Clear chart if no evaluations
-                charts.discipline.data.datasets[0].data = [0, 0, 0, 0, 0, 0];
-                charts.discipline.update();
-            }
-        }
 
-        // Update individual analysis
-        function updateIndividualAnalysis() {
-            const studentId = parseInt(document.getElementById('individualStudentSelect').value);
-            const container = document.getElementById('individualAnalysis');
-            
-            if (!studentId) {
-                container.innerHTML = '<p style="text-align: center; color: var(--gray-500);">Selecione um aluno para ver a análise individual.</p>';
-                return;
-            }
-            
-            const student = students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            const studentEvals = evaluations.filter(e => e.grades[studentId]);
-            
-            if (studentEvals.length === 0) {
-                container.innerHTML = `
-                    <div class="card">
-                        <div class="card-body">
-                            <p style="text-align: center; color: var(--gray-500);">
-                                Nenhuma avaliação encontrada para ${student.name}.
-                            </p>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Create individual chart
-            const chartHtml = `<canvas id="individualChart" style="max-height: 300px;"></canvas>`;
-            
-            // Get last evaluation details
-            const lastEval = studentEvals[studentEvals.length - 1];
-            const lastGrades = lastEval.grades[studentId];
-            const lastAvg = calculateAverage(Object.values(lastGrades));
-            
-            container.innerHTML = `
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">${student.name}</h3>
-                        <span class="badge badge-${lastAvg >= 70 ? 'success' : lastAvg >= 50 ? 'warning' : 'danger'}">
-                            Média: ${lastAvg.toFixed(1)}%
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h4 style="margin-bottom: 1rem;">Evolução por Avaliação</h4>
-                        ${chartHtml}
-                        
-                        <h4 style="margin: 2rem 0 1rem;">Desempenho na Última Avaliação</h4>
-                        <div style="display: grid; gap: 0.75rem;">
-                            ${disciplines.map((disc, i) => {
-                                const grade = lastGrades[i];
-                                const level = grade >= 70 ? 'high' : grade >= 50 ? 'medium' : 'low';
-                                return `
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span>${disc}</span>
-                                        <div style="display: flex; align-items: center; gap: 1rem;">
-                                            <div class="performance-bar" style="width: 150px;">
-                                                <div class="performance-fill ${level}" style="width: ${grade}%"></div>
-                                            </div>
-                                            <strong style="min-width: 50px; text-align: right;">${grade.toFixed(1)}%</strong>
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                        
-                        <h4 style="margin: 2rem 0 1rem;">Histórico de Avaliações</h4>
-                        <div class="evaluation-list">
-                            ${studentEvals.map(eval => {
-                                const grades = eval.grades[studentId];
-                                const avg = calculateAverage(Object.values(grades));
-                                return `
-                                    <div class="evaluation-item">
-                                        <div>
-                                            <div style="font-weight: 600;">${eval.name}</div>
-                                            <div class="evaluation-date">${new Date(eval.date).toLocaleDateString('pt-BR')}</div>
-                                        </div>
-                                        <div class="evaluation-grade" style="color: ${avg >= 70 ? 'var(--success)' : avg >= 50 ? 'var(--warning)' : 'var(--danger)'}">
-                                            ${avg.toFixed(1)}%
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Create individual evolution chart
-            setTimeout(() => {
-                const ctx = document.getElementById('individualChart').getContext('2d');
-                new Chart(ctx, {
+                charts.evolution = new Chart(ctx1, {
                     type: 'line',
                     data: {
-                        labels: studentEvals.map(e => e.name),
-                        datasets: disciplines.map((disc, i) => ({
-                            label: disc,
-                            data: studentEvals.map(e => e.grades[studentId][i]),
-                            borderColor: `hsl(${i * 60}, 70%, 50%)`,
-                            backgroundColor: 'transparent',
-                            tension: 0.4
-                        }))
+                        labels: labels,
+                        datasets: [{
+                            label: 'Média da Turma',
+                            data: data,
+                            borderColor: 'rgb(55, 48, 163)',
+                            backgroundColor: 'rgba(55, 48, 163, 0.1)',
+                            tension: 0.1
+                        }]
                     },
                     options: {
                         responsive: true,
@@ -2186,186 +1260,537 @@
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: 100,
-                                ticks: {
-                                    callback: function(value) {
-                                        return value + '%';
-                                    }
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
+                                max: 10
                             }
                         }
                     }
                 });
+            }
+
+            // Gráfico por disciplina
+            if (charts.discipline) {
+                charts.discipline.destroy();
+            }
+
+            if (evaluations.length > 0) {
+                const lastEval = evaluations[evaluations.length - 1];
+                const avgByDiscipline = disciplines.map((disc, index) => {
+                    let total = 0;
+                    let count = 0;
+                    for (const studentId in lastEval.grades) {
+                        total += lastEval.grades[studentId][index];
+                        count++;
+                    }
+                    return count > 0 ? total / count : 0;
+                });
+
+                const ctx2 = document.getElementById('disciplineChart').getContext('2d');
+                charts.discipline = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: disciplines,
+                        datasets: [{
+                            label: 'Média por Disciplina',
+                            data: avgByDiscipline,
+                            backgroundColor: [
+                                'rgba(55, 48, 163, 0.8)',
+                                'rgba(124, 58, 237, 0.8)',
+                                'rgba(5, 150, 105, 0.8)',
+                                'rgba(220, 38, 38, 0.8)',
+                                'rgba(217, 119, 6, 0.8)',
+                                'rgba(8, 145, 178, 0.8)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 10
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Atualizar gráficos de grupos
+            updateGroupCharts();
+        }
+
+        // Atualizar gráficos de grupos
+        function updateGroupCharts() {
+            const groups = ['A', 'B', 'C', 'D', 'E'];
+            
+            // Gráfico de evolução por grupo
+            if (charts.groupEvolution) {
+                charts.groupEvolution.destroy();
+            }
+
+            if (evaluations.length > 0) {
+                const ctx = document.getElementById('groupEvolutionChart').getContext('2d');
+                const labels = evaluations.map(e => e.name);
+                
+                const datasets = groups.map((group, index) => {
+                    const data = evaluations.map(eval => {
+                        const groupStudents = students.filter(s => s.group === group);
+                        let total = 0;
+                        let count = 0;
+                        
+                        groupStudents.forEach(student => {
+                            if (eval.grades[student.id]) {
+                                const grades = eval.grades[student.id];
+                                total += grades.reduce((a, b) => a + b, 0) / grades.length;
+                                count++;
+                            }
+                        });
+                        
+                        return count > 0 ? total / count : null;
+                    });
+
+                    const colors = [
+                        'rgb(55, 48, 163)',
+                        'rgb(124, 58, 237)',
+                        'rgb(5, 150, 105)',
+                        'rgb(220, 38, 38)',
+                        'rgb(217, 119, 6)'
+                    ];
+
+                    return {
+                        label: `Grupo ${group}`,
+                        data: data,
+                        borderColor: colors[index],
+                        backgroundColor: colors[index] + '33',
+                        tension: 0.1
+                    };
+                }).filter(dataset => dataset.data.some(d => d !== null));
+
+                charts.groupEvolution = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 10
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Gráfico de comparação atual por grupo
+            if (charts.groupComparison) {
+                charts.groupComparison.destroy();
+            }
+
+            if (evaluations.length > 0) {
+                const ctx2 = document.getElementById('groupComparisonChart').getContext('2d');
+                const lastEval = evaluations[evaluations.length - 1];
+                
+                const avgByGroup = groups.map(group => {
+                    const groupStudents = students.filter(s => s.group === group);
+                    let total = 0;
+                    let count = 0;
+                    
+                    groupStudents.forEach(student => {
+                        if (lastEval.grades[student.id]) {
+                            const grades = lastEval.grades[student.id];
+                            total += grades.reduce((a, b) => a + b, 0) / grades.length;
+                            count++;
+                        }
+                    });
+                    
+                    return count > 0 ? total / count : 0;
+                });
+
+                charts.groupComparison = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: groups.map(g => `Grupo ${g}`),
+                        datasets: [{
+                            label: 'Média na Última Avaliação',
+                            data: avgByGroup,
+                            backgroundColor: [
+                                'rgba(55, 48, 163, 0.8)',
+                                'rgba(124, 58, 237, 0.8)',
+                                'rgba(5, 150, 105, 0.8)',
+                                'rgba(220, 38, 38, 0.8)',
+                                'rgba(217, 119, 6, 0.8)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 10
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Gráfico de frequência por grupo
+            if (charts.groupAttendance) {
+                charts.groupAttendance.destroy();
+            }
+
+            const ctx3 = document.getElementById('groupAttendanceChart').getContext('2d');
+            const attendanceByGroup = groups.map(group => {
+                const groupStudents = students.filter(s => s.group === group);
+                let totalPresences = 0;
+                let totalPossible = 0;
+                
+                groupStudents.forEach(student => {
+                    attendanceRecords.forEach(record => {
+                        if (record.attendance[student.id]) {
+                            totalPossible++;
+                            if (record.attendance[student.id] === 'present') {
+                                totalPresences++;
+                            }
+                        }
+                    });
+                });
+                
+                return totalPossible > 0 ? (totalPresences / totalPossible * 100) : 0;
+            });
+
+            charts.groupAttendance = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: groups.map(g => `Grupo ${g}`),
+                    datasets: [{
+                        label: 'Frequência (%)',
+                        data: attendanceByGroup,
+                        backgroundColor: 'rgba(5, 150, 105, 0.8)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Estatísticas por grupo
+            updateGroupStats();
+        }
+
+        // Atualizar estatísticas por grupo
+        function updateGroupStats() {
+            const container = document.getElementById('groupStats');
+            const groups = ['A', 'B', 'C', 'D', 'E'];
+            
+            const stats = groups.map(group => {
+                const groupStudents = students.filter(s => s.group === group);
+                if (groupStudents.length === 0) return null;
+                
+                // Calcular média geral do grupo
+                let totalAvg = 0;
+                let avgCount = 0;
+                
+                if (evaluations.length > 0) {
+                    const lastEval = evaluations[evaluations.length - 1];
+                    groupStudents.forEach(student => {
+                        if (lastEval.grades[student.id]) {
+                            const grades = lastEval.grades[student.id];
+                            totalAvg += grades.reduce((a, b) => a + b, 0) / grades.length;
+                            avgCount++;
+                        }
+                    });
+                }
+                
+                const avgGrade = avgCount > 0 ? (totalAvg / avgCount).toFixed(1) : '-';
+                
+                // Calcular frequência
+                let presences = 0;
+                let total = 0;
+                groupStudents.forEach(student => {
+                    attendanceRecords.forEach(record => {
+                        if (record.attendance[student.id]) {
+                            total++;
+                            if (record.attendance[student.id] === 'present') {
+                                presences++;
+                            }
+                        }
+                    });
+                });
+                
+                const attendance = total > 0 ? ((presences / total) * 100).toFixed(0) : 0;
+                
+                return {
+                    group,
+                    students: groupStudents.length,
+                    avgGrade,
+                    attendance
+                };
+            }).filter(Boolean);
+
+            container.innerHTML = `
+                <h4>Resumo por Grupo</h4>
+                <table style="margin-top: 1rem;">
+                    <thead>
+                        <tr>
+                            <th>Grupo</th>
+                            <th>Alunos</th>
+                            <th>Média Última Avaliação</th>
+                            <th>Frequência</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${stats.map(stat => `
+                            <tr>
+                                <td>Grupo ${stat.group}</td>
+                                <td>${stat.students}</td>
+                                <td>${stat.avgGrade}</td>
+                                <td>${stat.attendance}%</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // Limpar todos os dados
+        function clearAllData() {
+            if (confirm('ATENÇÃO: Isso irá apagar TODOS os dados do sistema (alunos, avaliações e presenças). Deseja continuar?')) {
+                if (confirm('Tem certeza absoluta? Esta ação não pode ser desfeita!')) {
+                    students = [];
+                    evaluations = [];
+                    attendanceRecords = [];
+                    saveData();
+                    renderAll();
+                    updateCharts();
+                    showNotification('Todos os dados foram apagados!');
+                }
+            }
+        }
+
+        // Excluir avaliação
+        function deleteEvaluation(id) {
+            if (confirm('Tem certeza que deseja excluir esta avaliação?')) {
+                evaluations = evaluations.filter(e => e.id !== id);
+                saveData();
+                renderAll();
+                updateCharts();
+                showNotification('Avaliação excluída com sucesso!');
+            }
+        }
+
+        // Excluir registro de presença
+        function deleteAttendance(id) {
+            if (confirm('Tem certeza que deseja excluir este registro de presença?')) {
+                attendanceRecords = attendanceRecords.filter(r => r.id !== id);
+                saveData();
+                renderAll();
+                showNotification('Registro de presença excluído com sucesso!');
+            }
+        }
+
+        // Editar avaliação
+        function editEvaluation(id) {
+            const evaluation = evaluations.find(e => e.id === id);
+            if (!evaluation) return;
+
+            // Preencher o formulário com os dados existentes
+            document.getElementById('evaluationName').value = evaluation.name;
+            document.getElementById('evaluationDate').value = evaluation.date;
+            
+            // Marcar como edição
+            document.getElementById('evaluationModal').dataset.editId = id;
+            
+            showModal('evaluationModal');
+            
+            // Aguardar um momento para garantir que o formulário foi renderizado
+            setTimeout(() => {
+                // Preencher as notas existentes
+                for (const studentId in evaluation.grades) {
+                    const grades = evaluation.grades[studentId];
+                    grades.forEach((grade, index) => {
+                        const input = document.getElementById(`grade_${studentId}_${index}`);
+                        if (input) {
+                            input.value = grade;
+                        }
+                    });
+                }
             }, 100);
         }
 
-        // View evaluation details
-        function viewEvaluationDetails(index) {
-            const eval = evaluations[index];
-            let detailsHtml = `<h3>${eval.name} - ${new Date(eval.date).toLocaleDateString('pt-BR')}</h3>`;
-            detailsHtml += '<table style="width: 100%; margin-top: 1rem;"><thead><tr><th>Aluno</th>';
-            
-            disciplines.forEach(disc => {
-                detailsHtml += `<th style="font-size: 0.7rem;">${disc}</th>`;
-            });
-            detailsHtml += '<th>Média</th></tr></thead><tbody>';
-            
+        // Modificar a função launchEvaluation para suportar edição
+        function launchEvaluation(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('evaluationName').value;
+            const date = document.getElementById('evaluationDate').value;
+            const editId = document.getElementById('evaluationModal').dataset.editId;
+
+            const evalData = {
+                name,
+                date,
+                grades: {}
+            };
+
+            // Coletar notas
             students.forEach(student => {
-                if (eval.grades[student.id]) {
-                    const grades = eval.grades[student.id];
-                    const avg = calculateAverage(Object.values(grades));
-                    detailsHtml += `<tr><td>${student.name}</td>`;
-                    
-                    disciplines.forEach((disc, i) => {
-                        const grade = grades[i];
-                        const color = grade >= 70 ? 'var(--success)' : grade >= 50 ? 'var(--warning)' : 'var(--danger)';
-                        detailsHtml += `<td style="color: ${color}; font-weight: 600;">${grade.toFixed(1)}</td>`;
-                    });
-                    
-                    detailsHtml += `<td style="font-weight: 700;">${avg.toFixed(1)}%</td></tr>`;
-                }
+                const grades = [];
+                disciplines.forEach((disc, index) => {
+                    const input = document.getElementById(`grade_${student.id}_${index}`);
+                    if (input) {
+                        grades.push(parseFloat(input.value) || 0);
+                    }
+                });
+                evalData.grades[student.id] = grades;
             });
+
+            if (editId) {
+                // Modo edição
+                const index = evaluations.findIndex(e => e.id === parseInt(editId));
+                if (index !== -1) {
+                    evaluations[index] = { ...evaluations[index], ...evalData };
+                }
+                delete document.getElementById('evaluationModal').dataset.editId;
+                showNotification('Avaliação atualizada com sucesso!');
+            } else {
+                // Modo criação
+                const newEval = {
+                    id: Date.now(),
+                    ...evalData
+                };
+                evaluations.push(newEval);
+                showNotification('Avaliação lançada com sucesso!');
+            }
+
+            saveData();
+            renderAll();
+            updateCharts();
+            closeModal('evaluationModal');
             
-            detailsHtml += '</tbody></table>';
-            
-            // Create a temporary modal for details
-            const modal = document.createElement('div');
-            modal.className = 'modal active';
-            modal.innerHTML = `
-                <div class="modal-content" style="max-width: 800px;">
-                    <div class="modal-header">
-                        <h2 class="modal-title">Detalhes da Avaliação</h2>
-                        <button class="modal-close" onclick="this.closest('.modal').remove()">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        ${detailsHtml}
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" onclick="this.closest('.modal').remove()">Fechar</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
+            // Limpar formulário
+            document.getElementById('evaluationName').value = '';
+            document.getElementById('evaluationDate').value = '';
         }
 
-        // Switch tabs
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Find the clicked button by its content
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                if (tab === 'students' && btn.textContent.includes('Alunos')) {
-                    btn.classList.add('active');
-                } else if (tab === 'evaluations' && btn.textContent.includes('Histórico')) {
-                    btn.classList.add('active');
-                } else if (tab === 'individual' && btn.textContent.includes('Análise')) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(`${tab}-tab`).classList.add('active');
+        // Exportar dados
+        function exportData() {
+            const data = { students, evaluations, attendanceRecords };
+            const json = JSON.stringify(data, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `zarns_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showNotification('Dados exportados com sucesso!');
         }
 
-        // Show notification
-        function showNotification(message, type = 'success') {
+        // Importar dados
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    students = data.students || [];
+                    evaluations = data.evaluations || [];
+                    attendanceRecords = data.attendanceRecords || [];
+                    saveData();
+                    renderAll();
+                    updateCharts();
+                    showNotification('Dados importados com sucesso!');
+                } catch (error) {
+                    alert('Erro ao importar arquivo. Verifique se é um arquivo válido.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Notificação
+        function showNotification(message) {
             const notification = document.createElement('div');
             notification.className = 'notification';
-            if (type === 'error') {
-                notification.style.background = 'var(--danger)';
-            }
-            notification.innerHTML = `
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    ${type === 'success' ? 
-                        '<path d="M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3"></path>' : 
-                        '<circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line>'
-                    }
-                </svg>
-                ${message}
-            `;
+            notification.textContent = message;
             document.body.appendChild(notification);
-            
+
             setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease forwards';
-                setTimeout(() => notification.remove(), 300);
+                notification.remove();
             }, 3000);
         }
 
-        // Add slideOut animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideOut {
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
+        // Inicializar ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            
+            // Inicializar gráficos vazios
+            const ctx1 = document.getElementById('evolutionChart').getContext('2d');
+            charts.evolution = new Chart(ctx1, {
+                type: 'line',
+                data: { labels: [], datasets: [] },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
                 }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // PWA Service Worker with better caching
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                const swCode = `
-                    const CACHE_NAME = 'zarns-monitor-v2';
-                    const urlsToCache = [
-                        '/',
-                        'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js'
-                    ];
-
-                    self.addEventListener('install', event => {
-                        event.waitUntil(
-                            caches.open(CACHE_NAME)
-                                .then(cache => cache.addAll(urlsToCache))
-                        );
-                        self.skipWaiting();
-                    });
-
-                    self.addEventListener('activate', event => {
-                        event.waitUntil(
-                            caches.keys().then(cacheNames => {
-                                return Promise.all(
-                                    cacheNames.map(cacheName => {
-                                        if (cacheName !== CACHE_NAME) {
-                                            return caches.delete(cacheName);
-                                        }
-                                    })
-                                );
-                            })
-                        );
-                        return self.clients.claim();
-                    });
-
-                    self.addEventListener('fetch', event => {
-                        event.respondWith(
-                            caches.match(event.request)
-                                .then(response => {
-                                    if (response) {
-                                        return response;
-                                    }
-                                    return fetch(event.request);
-                                })
-                        );
-                    });
-                `;
-                
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                
-                navigator.serviceWorker.register(swUrl)
-                    .then(() => console.log('Service Worker registrado'))
-                    .catch(err => console.log('Erro ao registrar SW:', err));
             });
-        }
+
+            const ctx2 = document.getElementById('disciplineChart').getContext('2d');
+            charts.discipline = new Chart(ctx2, {
+                type: 'bar',
+                data: { labels: [], datasets: [] },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Inicializar gráficos de grupos
+            const ctx3 = document.getElementById('groupEvolutionChart').getContext('2d');
+            charts.groupEvolution = new Chart(ctx3, {
+                type: 'line',
+                data: { labels: [], datasets: [] },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            const ctx4 = document.getElementById('groupComparisonChart').getContext('2d');
+            charts.groupComparison = new Chart(ctx4, {
+                type: 'bar',
+                data: { labels: [], datasets: [] },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            const ctx5 = document.getElementById('groupAttendanceChart').getContext('2d');
+            charts.groupAttendance = new Chart(ctx5, {
+                type: 'bar',
+                data: { labels: [], datasets: [] },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateCharts();
+        });
     </script>
 </body>
 </html>
